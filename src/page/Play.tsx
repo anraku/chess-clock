@@ -25,11 +25,13 @@ const Play: FC = () => {
 
   useEffect(() => {
     let id: any
+    const delay = 100
+    const delta = delay/1000
     if (turnFlag != null) {
       id = setInterval(() => {
-        turnFlag ? setWhiteSecond(prev => prev - 1) :
-          setBlackSecond(prev => prev - 1)
-      }, 1000)
+        turnFlag ? setWhiteSecond(prev => prev - delta) :
+          setBlackSecond(prev => prev - delta)
+      }, delay)
     }
 
     if (whiteSecond === 0 || blackSecond === 0) {
@@ -42,13 +44,13 @@ const Play: FC = () => {
 
   return (
     <>
-      <h2>Play</h2>
+      <h2>Timer</h2>
       {timeOver?
         <h1>Time Over: {turnFlag === turnBlack? 'White Win' : 'Black Win'}</h1>
         :
         <>
-          <p>white: {whiteSecond}</p>
-          <p>black: {blackSecond}</p>
+          <p>white: {whiteSecond.toFixed(1)}</p>
+          <p>black: {blackSecond.toFixed(1)}</p>
           <button onClick={handleClickWhite} disabled={turnFlag === turnBlack}>White</button>
           <button onClick={handleClickBlack} disabled={turnFlag == null || turnFlag === turnWhite}>Black</button>
         </>
