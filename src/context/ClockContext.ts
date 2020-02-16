@@ -1,2 +1,10 @@
 import { createContext } from 'react'
-export const ClockContext = createContext(0)
+
+export const Clock = {
+  second: 600,
+  setSecond: (value: number) => { }
+}
+
+export const ClockContext = createContext(
+  (null as unknown) as typeof Clock
+)
