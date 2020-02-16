@@ -2,7 +2,7 @@ import { createContext } from 'react'
 
 export const Clock = {
   second: 600,
-  setSecond: (value: number) => { }
+  setSecond: (_: number) => { }
 }
 
 export const ClockContext = createContext(

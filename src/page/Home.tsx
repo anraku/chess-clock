@@ -4,16 +4,18 @@ import { ClockContext } from '../context/ClockContext'
 
 const Home = () => {
   const { history } = useReactRouter()
-  const { second, setSecond } = useContext(ClockContext)
-  const handleClickPlay = (e: any) => {
+  const { setSecond } = useContext(ClockContext)
+  const handleClickPlay = (second:number) => (e: any) => {
     e.preventDefault()
-    // setSecond(1000)
+    setSecond(second)
     history.push('/play')
   }
   return (
     <>
       <h2>ChessClock Home</h2>
-      <button onClick={handleClickPlay}>start</button>
+      <button onClick={handleClickPlay(300)}>5:00</button>
+      <button onClick={handleClickPlay(600)}>10:00</button>
+      <button onClick={handleClickPlay(1800)}>30:00</button>
     </>
   )
 }
