@@ -5,6 +5,4 @@ export const Clock = {
   setSecond: (_: number) => { }
 }
 
-export const ClockContext = createContext(
-  (null as unknown) as typeof Clock
-)
+export const ClockContext = createContext(Clock)

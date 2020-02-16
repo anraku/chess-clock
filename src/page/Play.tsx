@@ -7,40 +7,52 @@ type Turn = boolean | null
 const Play: FC = () => {
   const { history } = useReactRouter()
   const { second } = useContext(ClockContext)
-  const [white, setWhite] = useState(second)
-  const [black, setBlack] = useState(second)
-  const [flag, setFlag] = useState<Turn>(null)
+  const [whiteSecond, setWhiteSecond] = useState(second)
+  const [blackSecond, setBlackSecond] = useState(second)
+  const [turnFlag, setTurnFlag] = useState<Turn>(null)
+  const [timeOver, setTimeOver] = useState(false)
   const turnWhite: Turn = true
   const turnBlack: Turn = false
 
   const handleClickWhite = (e: any) => {
     e.preventDefault()
-    setFlag(turnBlack)
+    setTurnFlag(turnBlack)
   }
   const handleClickBlack = (e: any) => {
     e.preventDefault()
-    setFlag(turnWhite)
+    setTurnFlag(turnWhite)
   }
 
   useEffect(() => {
     let id: any
-    if (flag != null) {
+    if (turnFlag != null) {
       id = setInterval(() => {
-        flag ? setWhite(prev => prev - 1) :
-          setBlack(prev => prev - 1)
+        turnFlag ? setWhiteSecond(prev => prev - 1) :
+          setBlackSecond(prev => prev - 1)
       }, 1000)
     }
 
+    if (whiteSecond === 0 || blackSecond === 0) {
+      setTimeOver(true)
+      clearInterval(id)
+    }
+
     return () => clearInterval(id)
-  }, [flag])
+  }, [turnFlag, whiteSecond, blackSecond])
 
   return (
     <>
       <h2>Play</h2>
-      <p>white: {white}</p>
-      <p>black: {black}</p>
-      <button onClick={handleClickWhite} disabled={flag === turnBlack}>White</button>
-      <button onClick={handleClickBlack} disabled={flag == null || flag === turnWhite}>Black</button>
+      {timeOver?
+        <h1>Time Over: {turnFlag === turnBlack? 'White Win' : 'Black Win'}</h1>
+        :
+        <>
+          <p>white: {whiteSecond}</p>
+          <p>black: {blackSecond}</p>
+          <button onClick={handleClickWhite} disabled={turnFlag === turnBlack}>White</button>
+          <button onClick={handleClickBlack} disabled={turnFlag == null || turnFlag === turnWhite}>Black</button>
+        </>
+      }
       <button onClick={() => history.push('/')}>Back Home</button>
     </>
   )
