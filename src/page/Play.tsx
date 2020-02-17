@@ -2,6 +2,9 @@ import React, { FC, useContext, useEffect, useState } from 'react'
 import useReactRouter from 'use-react-router'
 import { ClockContext } from '../context/ClockContext'
 
+import styled from 'styled-components'
+import { Button } from 'antd'
+
 type Turn = boolean | null
 
 const Play: FC = () => {
