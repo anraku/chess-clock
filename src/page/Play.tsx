@@ -54,12 +54,16 @@ const Play: FC = () => {
           :
           <Container>
             <TimerBlock>
-              <p>white: {whiteSecond.toFixed(1)}</p>
-              <Button content="White" size="huge" onClick={handleClickWhite} disabled={turnFlag === turnBlack} />
+              <h3>White</h3>
+              <h3>{whiteSecond.toFixed(1)}</h3>
+              {/* <Button content="White" size="massive" onClick={handleClickWhite} disabled={turnFlag === turnBlack} /> */}
+              <WhiteButton onClick={handleClickWhite}/>
             </TimerBlock>
             <TimerBlock>
-              <p>black: {blackSecond.toFixed(1)}</p>
-              <Button content="Black" color="black" size="huge" onClick={handleClickBlack} disabled={turnFlag == null || turnFlag === turnWhite} />
+              <h3>Black</h3>
+              <h3>{blackSecond.toFixed(1)}</h3>
+              {/* <Button content="Black" color="black" size="massive" onClick={handleClickBlack} disabled={turnFlag == null || turnFlag === turnWhite} /> */}
+              <BlackButton onClick={handleClickBlack}/>
             </TimerBlock>
           </Container>
         }
@@ -71,11 +75,49 @@ const Play: FC = () => {
 
 const Container = styled.div`
   display: flex;
+  height: 50%;
+  margin-bottom: 10%;
 `
 
 const TimerBlock = styled.div`
   width: 50%;
+  padding: 1rem 1rem;
   text-align: center;
+`
+
+const WhiteButton = styled.div`
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  padding: 1rem 1rem;
+  text-decoration: none;
+  background: #ffffff;
+  color: #FFF;
+  border: 2px solid #222222;
+  border-bottom: solid 4px #444444;
+  border-radius: 3px;
+
+  :active {
+    transform: translateY(4px);
+    border-bottom: solid 2px #444444;
+  }
+`
+
+const BlackButton = styled.div`
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  padding: 1rem 1rem;
+  text-decoration: none;
+  background: #555555;
+  color: #FFF;
+  border-bottom: solid 4px #333333;
+  border-radius: 3px;
+
+  :active {
+    transform: translateY(4px);
+    border-bottom: solid 2px #333333;
+  }
 `
 
 export default Play
