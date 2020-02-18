@@ -48,19 +48,44 @@ const Play: FC = () => {
   return (
     <>
       <h2>Timer</h2>
-      {timeOver?
-        <h1>Time Over: {turnFlag === turnBlack? 'White Win' : 'Black Win'}</h1>
-        :
-        <>
-          <p>white: {whiteSecond.toFixed(1)}</p>
-          <p>black: {blackSecond.toFixed(1)}</p>
-          <button onClick={handleClickWhite} disabled={turnFlag === turnBlack}>White</button>
-          <button onClick={handleClickBlack} disabled={turnFlag == null || turnFlag === turnWhite}>Black</button>
-        </>
-      }
-      <button onClick={() => history.push('/')}>Back Home</button>
+      <>
+        {timeOver?
+          <h1>Time Over: {turnFlag === turnBlack? 'White Win' : 'Black Win'}</h1>
+          :
+          <Container>
+            <TimerBlock>
+              <p>white: {whiteSecond.toFixed(1)}</p>
+              <WhiteButton onClick={handleClickWhite} disabled={turnFlag === turnBlack}>White</WhiteButton>
+            </TimerBlock>
+            <TimerBlock>
+              <p>black: {blackSecond.toFixed(1)}</p>
+              <BlackButton onClick={handleClickBlack} disabled={turnFlag == null || turnFlag === turnWhite}>Black</BlackButton>
+            </TimerBlock>
+          </Container>
+        }
+        <Button type="primary" onClick={() => history.push('/')}>Back Home</Button>
+      </>
     </>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+`
+
+const TimerBlock = styled.div`
+  width: 50%;
+  text-align: center;
+`
+
+const WhiteButton = styled.button`
+  color: #111111;
+  background-color: #ffffff;
+`
+
+const BlackButton = styled.button`
+  color: #eeeeee;
+  background-color: #111111;
+`
 
 export default Play
