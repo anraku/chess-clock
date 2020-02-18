@@ -3,7 +3,7 @@ import useReactRouter from 'use-react-router'
 import { ClockContext } from '../context/ClockContext'
 
 import styled from 'styled-components'
-import { Button } from 'antd'
+import { Button } from 'semantic-ui-react'
 
 type Turn = boolean | null
 
@@ -55,15 +55,15 @@ const Play: FC = () => {
           <Container>
             <TimerBlock>
               <p>white: {whiteSecond.toFixed(1)}</p>
-              <WhiteButton onClick={handleClickWhite} disabled={turnFlag === turnBlack}>White</WhiteButton>
+              <Button content="White" size="huge" onClick={handleClickWhite} disabled={turnFlag === turnBlack} />
             </TimerBlock>
             <TimerBlock>
               <p>black: {blackSecond.toFixed(1)}</p>
-              <BlackButton onClick={handleClickBlack} disabled={turnFlag == null || turnFlag === turnWhite}>Black</BlackButton>
+              <Button content="Black" color="black" size="huge" onClick={handleClickBlack} disabled={turnFlag == null || turnFlag === turnWhite} />
             </TimerBlock>
           </Container>
         }
-        <Button type="primary" onClick={() => history.push('/')}>Back Home</Button>
+        <Button primary content="Back Home" size="huge" onClick={() => history.push('/')} />
       </>
     </>
   )
@@ -76,16 +76,6 @@ const Container = styled.div`
 const TimerBlock = styled.div`
   width: 50%;
   text-align: center;
-`
-
-const WhiteButton = styled.button`
-  color: #111111;
-  background-color: #ffffff;
-`
-
-const BlackButton = styled.button`
-  color: #eeeeee;
-  background-color: #111111;
 `
 
 export default Play
