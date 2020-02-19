@@ -31,7 +31,6 @@ const Play: FC = () => {
     let id: any
     const delay = 100
     const delta = delay/1000
-    console.log(startFlag)
     if (startFlag) {
       id = setInterval(() => {
         turnFlag ? setWhiteSecond(prev => prev - delta) :
@@ -46,7 +45,7 @@ const Play: FC = () => {
     }
 
     return () => clearInterval(id)
-  }, [turnFlag, whiteSecond, blackSecond])
+  }, [startFlag, turnFlag, whiteSecond, blackSecond])
 
   return (
     <>
