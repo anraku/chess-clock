@@ -9,9 +9,9 @@ type Turn = boolean | null
 
 const Play: FC = () => {
   const { history } = useReactRouter()
-  const { second } = useContext(ClockContext)
-  const [whiteSecond, setWhiteSecond] = useState(second)
-  const [blackSecond, setBlackSecond] = useState(second)
+  const { time } = useContext(ClockContext)
+  const [whiteSecond, setWhiteSecond] = useState(time)
+  const [blackSecond, setBlackSecond] = useState(time)
   const [turnFlag, setTurnFlag] = useState<Turn>(null)
   const [timeOver, setTimeOver] = useState(false)
   const turnWhite: Turn = true

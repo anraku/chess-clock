@@ -6,9 +6,9 @@ import Play from './page/Play'
 import './App.css';
 
 function App() {
-  const [second, setSecond] = useState(600)
+  const [time, setTime] = useState(600)
   return (
-    <ClockContext.Provider value={{ second, setSecond }}>
+    <ClockContext.Provider value={{ time, setTime }}>
       <div className="App">
         <Router>
           <Switch>
