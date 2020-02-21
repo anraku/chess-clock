@@ -8,23 +8,27 @@ import { Button, Input } from 'semantic-ui-react'
 const Home = () => {
   const { history } = useReactRouter()
   const { setTime } = useContext(ClockContext)
-  const [ second, setSecond ] = useState('0')
-  const [ minute, setMinute ] = useState('0')
+  const [second, setSecond] = useState('0')
+  const [minute, setMinute] = useState('0')
 
-  const handleClickPlay = (time:number) => (e: any) => {
+  const handleClickPlay = (time: number) => (
+    e: React.MouseEvent<HTMLButtonElement>
+  ): void => {
     e.preventDefault()
     setTime(time)
     history.push('/play')
   }
-  const handleClickCustomPlay = (e: any) => {
+  const handleClickCustomPlay = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ): void => {
     e.preventDefault()
     const s = parseInt(second)
     const m = parseInt(minute)
-    
+
     if (isNaN(m) || isNaN(s)) {
       return
     }
-    const t = m*60 + s
+    const t = m * 60 + s
     if (t < 10) {
       return
     }
@@ -39,17 +43,47 @@ const Home = () => {
       <>
         <Label>Select Timer</Label>
         <ButtonGroup>
-          <ButtonWrap primary size="huge" content="5:00" onClick={handleClickPlay(300)} />
-          <ButtonWrap primary size="huge" content="10:00" onClick={handleClickPlay(600)} />
-          <ButtonWrap primary size="huge" content="30:00" onClick={handleClickPlay(1800)} />
+          <ButtonWrap
+            primary
+            size="huge"
+            content="5:00"
+            onClick={handleClickPlay(300)}
+          />
+          <ButtonWrap
+            primary
+            size="huge"
+            content="10:00"
+            onClick={handleClickPlay(600)}
+          />
+          <ButtonWrap
+            primary
+            size="huge"
+            content="30:00"
+            onClick={handleClickPlay(1800)}
+          />
         </ButtonGroup>
       </>
       <>
         <Label>Custom Timer</Label>
         <CustomTimerWrap>
-          <Input placeholder='Minute' size="huge" value={minute} onChange={e => setMinute(e.target.value)}/>
-          <Input placeholder='Second' size="huge" value={second} onChange={e => setSecond(e.target.value)}/>
-          <StartButton primary size="huge" content="Start" onClick={handleClickCustomPlay} />
+          <Input
+            placeholder="Minute"
+            size="huge"
+            value={minute}
+            onChange={e => setMinute(e.target.value)}
+          />
+          <Input
+            placeholder="Second"
+            size="huge"
+            value={second}
+            onChange={e => setSecond(e.target.value)}
+          />
+          <StartButton
+            primary
+            size="huge"
+            content="Start"
+            onClick={handleClickCustomPlay}
+          />
         </CustomTimerWrap>
       </>
     </>
@@ -65,7 +99,7 @@ const Header = styled.div`
 
 const HeaderLabel = styled.h2`
   text-align: left;
-  color: #A7ADB4;
+  color: #a7adb4;
 `
 
 const Label = styled.h2`

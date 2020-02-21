@@ -18,56 +18,75 @@ const Play: FC = () => {
   const [startFlag, setStartFlag] = useState(false)
   const [timeOver, setTimeOver] = useState(false)
 
-  const handleClickWhite = (_: any) => {
+  const handleClickWhite = () => {
     setTurnFlag(turnBlack)
     setStartFlag(true)
   }
-  const handleClickBlack = (_: any) => {
+  const handleClickBlack = () => {
     setTurnFlag(turnWhite)
     setStartFlag(true)
   }
 
   useEffect(() => {
-    let id: any
+    let id = 0
     const delay = 100
-    const delta = delay/1000
+    const delta = delay / 1000
     if (startFlag) {
       id = setInterval(() => {
-        turnFlag ? setWhiteSecond(prev => prev - delta) :
-          setBlackSecond(prev => prev - delta)
+        turnFlag
+          ? setWhiteSecond(prev => prev - delta)
+          : setBlackSecond(prev => prev - delta)
       }, delay)
-    }
-
-    if (whiteSecond === 0 || blackSecond === 0) {
-      setTimeOver(true)
-      setStartFlag(false)
+    } else {
       clearInterval(id)
     }
 
     return () => clearInterval(id)
-  }, [startFlag, turnFlag, whiteSecond, blackSecond])
+  }, [startFlag, turnFlag])
+
+  useEffect(() => {
+    if (whiteSecond === 0 || blackSecond === 0) {
+      setTimeOver(true)
+      setStartFlag(false)
+    }
+  }, [whiteSecond, blackSecond])
 
   return (
     <>
       <h2>Timer</h2>
       <>
-        {timeOver?
-          <h1>Time Over: {turnFlag === turnBlack? 'White Win' : 'Black Win'}</h1>
-          :
+        {timeOver ? (
+          <h1>
+            Time Over: {turnFlag === turnBlack ? 'White Win' : 'Black Win'}
+          </h1>
+        ) : (
           <Container>
             <TimerBlock>
               <h3>White</h3>
               <h3>{whiteSecond.toFixed(1)}</h3>
-              {turnFlag === turnWhite ? <WhiteButton onClick={handleClickWhite} /> : <DisableButton />}
+              {turnFlag === turnWhite ? (
+                <WhiteButton onClick={handleClickWhite} />
+              ) : (
+                <DisableButton />
+              )}
             </TimerBlock>
             <TimerBlock>
               <h3>Black</h3>
               <h3>{blackSecond.toFixed(1)}</h3>
-              {turnFlag === turnBlack ? <BlackButton onClick={handleClickBlack} /> : <DisableButton />}
+              {turnFlag === turnBlack ? (
+                <BlackButton onClick={handleClickBlack} />
+              ) : (
+                <DisableButton />
+              )}
             </TimerBlock>
           </Container>
-        }
-        <Button primary content="Back Home" size="huge" onClick={() => history.push('/')} />
+        )}
+        <Button
+          primary
+          content="Back Home"
+          size="huge"
+          onClick={() => history.push('/')}
+        />
       </>
     </>
   )
